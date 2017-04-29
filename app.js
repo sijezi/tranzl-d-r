@@ -19,7 +19,12 @@ app.use(require('express-session'){
 	secret: "Coding is life",
 	resave: false,
 	saveUninitialized: false
-})
+});
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticated()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // ROOT ROUTE
 app.get("/", function(req,res){
