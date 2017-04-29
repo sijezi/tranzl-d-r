@@ -15,6 +15,11 @@ app.use(methodOverride("_method"));
 
 
 //PASSPORT CONFIG
+app.use(require('express-session'){
+	secret: "Coding is life",
+	resave: false,
+	saveUninitialized: false
+})
 
 // ROOT ROUTE
 app.get("/", function(req,res){
