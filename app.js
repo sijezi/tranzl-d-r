@@ -3,6 +3,7 @@ var PORT = process.env.port || 3000;
 var express = require('express');
 var app = express();
 var bodyParser = require("body-parser");
+var mongoose = require("mongoose");
 var passport = require("passport");
 var localStrategy = require("passport-local");
 var methodOverride = require("method-override");
