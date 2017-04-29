@@ -21,7 +21,7 @@ app.get("/", function(req,res){
 	res.render("home");
 });
 
-// ROOT ROUTE
+// SIGNUP ROUTE
 app.get("/signup", function(req, res){
 	res.render("signup");
 });
