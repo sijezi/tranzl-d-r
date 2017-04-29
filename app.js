@@ -3,6 +3,11 @@ var PORT = process.env.port || 3000;
 var express = require('express');
 var app = express();
 var bodyParser = require("body-parser");
+
+//use body parser
+app.use(bodyParser.urlencoded({extended: true}));
+//set view engine
+app.set("view engine", "ejs");
 // routes
 
 app.listen(PORT, function() {
