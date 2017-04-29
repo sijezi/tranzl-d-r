@@ -15,6 +15,10 @@ app.get("/", function(req,res){
 	res.render("home");
 });
 
+//register route
+app.get("/signup", function(req, res){
+	res.render("signup");
+});
 
 app.listen(PORT, function() {
   console.log('app is running on port 3000');
