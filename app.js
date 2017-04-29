@@ -3,6 +3,9 @@ var PORT = process.env.port || 3000;
 var express = require('express');
 var app = express();
 var bodyParser = require("body-parser");
+var passport = require("passport");
+var localStrategy = require("passport-local");
+var methodOverride = require("method-override");
 
 //use body parser
 app.use(bodyParser.urlencoded({extended: true}));
