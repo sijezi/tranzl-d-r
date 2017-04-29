@@ -14,12 +14,14 @@ app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
 
 
-// root route
+//PASSPORT CONFIG
+
+// ROOT ROUTE
 app.get("/", function(req,res){
 	res.render("home");
 });
 
-//register route
+// ROOT ROUTE
 app.get("/signup", function(req, res){
 	res.render("signup");
 });
