@@ -10,7 +10,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
 
-// routes
+// root route
+app.get("/", function(req,res){
+	res.render("home");
+});
+
 
 app.listen(PORT, function() {
   console.log('app is running on port 3000');
