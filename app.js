@@ -16,6 +16,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
 
+//USER MODEL
+var UserSchema = new mongoose.Schema({
+	username: String,
+	password: String
+});
+
 
 //PASSPORT CONFIG
 app.use(require('express-session'){
