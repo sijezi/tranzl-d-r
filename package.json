@@ -1,0 +1,23 @@
+{
+  "name": "translader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sijezi/tranzl-d-r.git"
+  },
+  "keywords": [
+    "translator",
+    "app"
+  ],
+  "author": "layth adan, osama said, yasir rashid, yahya hussein",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sijezi/tranzl-d-r/issues"
+  },
+  "homepage": "https://github.com/sijezi/tranzl-d-r#readme"
+}
