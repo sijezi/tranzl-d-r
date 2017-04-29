@@ -8,6 +8,8 @@ var passport = require("passport");
 var localStrategy = require("passport-local");
 var methodOverride = require("method-override");
 
+//connect to mongoose
+mongoose.connect("mongodb://localhost/translatr");
 //use body parser
 app.use(bodyParser.urlencoded({extended: true}));
 //set view engine
@@ -32,7 +34,7 @@ app.get("/", function(req,res){
 	res.render("home");
 });
 
-// SIGNUP ROUTE
+// SIGNUP ROUTE TO SHOW REGISTER FORM
 app.get("/signup", function(req, res){
 	res.render("signup");
 });
