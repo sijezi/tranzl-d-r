@@ -8,6 +8,8 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));
 //set view engine
 app.set("view engine", "ejs");
+
+
 // routes
 
 app.listen(PORT, function() {
