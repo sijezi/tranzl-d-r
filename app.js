@@ -58,6 +58,7 @@ app.post("/signup", function(req,res){
 	User.register(newUser, req.body.password, function(err,user){
 		if(err){
 			req.flash("error", err.message);
+			console.log(err.message);
 			return res.render("signup");
 		}
 		passport.authenticate("local")(req,res,function(){
