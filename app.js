@@ -112,6 +112,44 @@ app.get("/logout", function(req,res){
 	res.redirect("/home");
 });
 
+
+// Show Profiles
+app.get("/profiles", function(req,res){
+	Profile.find({}, function(err,allProfiles){
+		if(err){
+			console.log(err);
+		}else{
+			res.render("/campgrounds/index",{campgrounds: allProfiles});
+		}
+	});
+});
+
+//Create new profile to db
+app.post("/", function(req,res){
+	var name = req.body.name;
+	var availability = req.body.availability;
+	var languages = req.body.languages;
+	var biography = req.body.biography;
+	var author = {
+		id: req.user_id,
+		username: req.user.username
+	},
+	var newProfile = {name: name, availability: availability, languages: languages, biography: biography, author: author}
+	//Create new profile and save to db
+	Profile.Create(newProfile, function(err,newCreated){
+		if(err){
+			console.log(err);
+		}else{
+			res.redirect("/profiles");
+		}
+	});
+});
+
+//Form to to create new profile
+app.get("/new",function(req,res){
+	res.render("/profiles/new");
+});
+
 app.listen(PORT, function() {
   console.log('app is running on port 3000');
 });
