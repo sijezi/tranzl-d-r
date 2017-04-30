@@ -7,6 +7,7 @@ var mongoose = require("mongoose");
 var passport = require("passport");
 var localStrategy = require("passport-local");
 var methodOverride = require("method-override");
+var User = require("./models/user");
 
 //connect to mongoose
 mongoose.connect("mongodb://localhost/translatr");
@@ -25,9 +26,9 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-// passport.use(new localStrategy(User.authenticated()));
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 
 app.use(function(req,res,next){
