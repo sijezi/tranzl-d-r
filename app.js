@@ -48,23 +48,29 @@ app.get("/", function(req,res){
 	res.render("home");
 });
 
+app.get("/home", function(req,res){
+	res.render("home");
+});
+
 app.get("/signup", function(req,res){
 	res.render("signup");
 });
 
 // SIGNUP LOGIC
 app.post("/signup", function(req,res){
-	var newUser = new User({username: req.body.name});
+	var newUser = new User({username: req.body.username});
 	User.register(newUser, req.body.password, function(err,user){
 		if(err){
-			req.flash("error", err.message);
-			console.log(err.message);
+			// req.flash("error", err.message);
+			// console.log(err.message);
+			
 			return res.render("signup");
+
 		}
 		passport.authenticate("local")(req,res,function(){
 			req.flash("success", "Welcome to translatr" + user.username);
 			console.log(user.username);
-			res.redirect("/home");
+			res.redirect("home");
 		});
 	});
 });
