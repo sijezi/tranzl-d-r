@@ -95,9 +95,14 @@ app.get("/login", function(req,res){
 // LOGIN LOGIC
 app.post("/login", passport.authenticate("local",
 	{
-		successRedirect: "/home",
+		successRedirect: "home",
 		failureRedirect: "/login"
 	}), function(req,res){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	req.flash("error", "You Need To Be Logged In To Do That!");
+	res.redirect("/login");
 });
 
 //LOGOUT ROUTE PENDING LOGOUT BUTTON
