@@ -113,43 +113,44 @@ app.get("/profiles", function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.render("/campgrounds/index", {campgrounds: allProfiles});
+      res.render("/profile_show_case", {profiles: allProfiles});
     }
   });
 });
 
 //Create new profile to db
-app.post("/", function(req, res) {
+app.post("/profile", function(req, res) {
   var name = req.body.name;
   var availability = req.body.availability;
   var languages = req.body.languages;
   var biography = req.body.biography;
+  var specialty = req.body.specialty;
   var author = {
     id: req.user_id,
     username: req.user.username
-  };
+  }
 
   var newProfile = {
     name: name,
     availability: availability,
     languages: languages,
     biography: biography,
+    specialty: specialty,
     author: author
-  };
-
+  }
   //Create new profile and save to db
-  Profile.Create(newProfile, function(err, newCreated) {
+  Profile.Create(newProfile, function(err, newlyCreated) {
     if (err) {
       console.log(err);
     } else {
-      res.redirect("/profiles");
+      res.redirect("/profile_show_case");
     }
   });
 });
 
 //Form to to create new profile
-app.get("/new", function(req, res) {
-  res.render("/profiles/new");
+app.get("/profiles", function(req, res) {
+  res.render("/profile");
 });
 
 app.listen(PORT, function() {
