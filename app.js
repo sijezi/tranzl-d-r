@@ -10,7 +10,6 @@ var passport = require("passport");
 var LocalStrategy = require("passport-local");
 var methodOverride = require("method-override");
 var User = require("./models/user");
-var Profile = require('./models/profile');
 
 //connect to mongoose
 mongoose.connect("mongodb://localhost/translator");
@@ -107,46 +106,46 @@ app.get("/logout", function(req, res) {
   res.redirect("/home");
 });
 
-// Show Profiles
-app.get("/profiles", function(req, res) {
-  Profile.find({}, function(err, allProfiles) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("/profile_show_case", {profiles: allProfiles});
-    }
-  });
-});
+// // Show Profiles
+// app.get("/profiles", function(req, res) {
+//   Profile.find({}, function(err, allProfiles) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.render("/profile_show_case", {profiles: allProfiles});
+//     }
+//   });
+// });
 
-//Create new profile to db
-app.post("/profile", function(req, res) {
-  var name = req.body.name;
-  var availability = req.body.availability;
-  var languages = req.body.languages;
-  var biography = req.body.biography;
-  var specialty = req.body.specialty;
-  var author = {
-    id: req.user_id,
-    username: req.user.username
-  }
+// //Create new profile to db
+// app.post("/profile", function(req, res) {
+//   var name = req.body.name;
+//   var availability = req.body.availability;
+//   var languages = req.body.languages;
+//   var biography = req.body.biography;
+//   var specialty = req.body.specialty;
+//   var author = {
+//     id: req.user_id,
+//     username: req.user.username
+//   }
 
-  var newProfile = {
-    name: name,
-    availability: availability,
-    languages: languages,
-    biography: biography,
-    specialty: specialty,
-    author: author
-  }
-  //Create new profile and save to db
-  Profile.Create(newProfile, function(err, newlyCreated) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect("/profile_show_case");
-    }
-  });
-});
+//   var newProfile = {
+//     name: name,
+//     availability: availability,
+//     languages: languages,
+//     biography: biography,
+//     specialty: specialty,
+//     author: author
+//   }
+//   //Create new profile and save to db
+//   Profile.Create(newProfile, function(err, newlyCreated) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.redirect("/profile_show_case");
+//     }
+//   });
+// });
 
 //Form to to create new profile
 app.get("/profiles", function(req, res) {
