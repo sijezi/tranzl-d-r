@@ -65,14 +65,12 @@ app.get('/home', function(req, res) {
 
 // SIGNUP LOGIC
 app.post("/signup", function(req, res) {
-  var newUser = new User({username: req.body.username, language: req.body.language, profession: profession});
+  var newUser = new User({username: req.body.username, language: req.body.language, profession: req.body.profession});
   User.register(newUser, req.body.password, function(err, user) {
     if (err) {
       // req.flash("error", err.message);
-      // console.log(err.message);
-
+      console.log(err.message);
       return res.render("signup");
-
     }
     passport.authenticate("local")(req, res, function() {
       req.flash("success", "Welcome to translatr" + user.username);
