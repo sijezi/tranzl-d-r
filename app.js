@@ -50,8 +50,9 @@ app.get("/login", function(req,res){
 	res.render("login");
 });
 
-//LOGOUT ROUTE
+//LOGOUT ROUTE PENDING LOGOUT BUTTON
 app.get("/logout", function(req,res){
+	req.logout();
 	res.redirect("home");
 });
 
