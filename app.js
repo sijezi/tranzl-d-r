@@ -45,8 +45,14 @@ app.get("/signup", function(req, res){
 	res.render("signup");
 });
 
+//LOGIN ROUTE
 app.get("/login", function(req,res){
 	res.render("login");
+});
+
+//LOGOUT ROUTE
+app.get("/logout", function(req,res){
+	res.redirect("home");
 });
 
 app.listen(PORT, function() {
