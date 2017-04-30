@@ -4,6 +4,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+var flash = require("connect-flash");
 var passport = require("passport");
 var localStrategy = require("passport-local");
 var methodOverride = require("method-override");
@@ -51,6 +52,16 @@ app.get("/signup", function(req, res){
 // SIGNUP LOGIC
 app.post("/signup", function(req,res){
 	var newUser = new User({username: req.body.username});
+	User.register(newUser, req.body.password, function(err,user){
+		if(err){
+			req.flash("error", err.message);
+			return res.render("register");
+		}
+		passport.authenticate("local")(req,res,function(){
+			req.flash("success", "Welcome to translatr" + user.username);
+			res.redirect("/home");
+		})
+	})
 })
 
 //LOGIN ROUTE
@@ -61,7 +72,7 @@ app.get("/login", function(req,res){
 //LOGOUT ROUTE PENDING LOGOUT BUTTON
 app.get("/logout", function(req,res){
 	req.logout();
-	res.redirect("home");
+	res.redirect("/home");
 });
 
 app.listen(PORT, function() {
