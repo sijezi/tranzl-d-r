@@ -16,18 +16,24 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
 
+//USER MODEL
+// var UserSchema = new mongoose.Schema({
+// 	username: String,
+// 	password: String
+// });
+
 
 //PASSPORT CONFIG
-app.use(require('express-session'){
+app.use(require('express-session')({
 	secret: "Coding is life",
 	resave: false,
 	saveUninitialized: false
-});
+}));
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new localStrategy(User.authenticated()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+// passport.use(new localStrategy(User.authenticated()));
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
 
 // ROOT ROUTE
 app.get("/", function(req,res){
@@ -37,6 +43,17 @@ app.get("/", function(req,res){
 // SIGNUP ROUTE TO SHOW REGISTER FORM
 app.get("/signup", function(req, res){
 	res.render("signup");
+});
+
+//LOGIN ROUTE
+app.get("/login", function(req,res){
+	res.render("login");
+});
+
+//LOGOUT ROUTE PENDING LOGOUT BUTTON
+app.get("/logout", function(req,res){
+	req.logout();
+	res.redirect("home");
 });
 
 app.listen(PORT, function() {
