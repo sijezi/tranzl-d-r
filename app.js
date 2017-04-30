@@ -8,10 +8,11 @@ var flash = require("connect-flash");
 var passport = require("passport");
 var localStrategy = require("passport-local");
 var methodOverride = require("method-override");
+var passportLocalMongoose = require("passport-local-mongoose");
 var User = require("./models/user");
 
 //connect to mongoose
-mongoose.connect("mongodb://localhost/translatr");
+mongoose.connect("mongodb://localhost/translator");
 //use body parser
 app.use(bodyParser.urlencoded({extended: true}));
 //set view engine
