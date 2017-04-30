@@ -17,10 +17,10 @@ app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
 
 //USER MODEL
-var UserSchema = new mongoose.Schema({
-	username: String,
-	password: String
-});
+// var UserSchema = new mongoose.Schema({
+// 	username: String,
+// 	password: String
+// });
 
 
 //PASSPORT CONFIG
@@ -31,9 +31,9 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new localStrategy(User.authenticated()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+// passport.use(new localStrategy(User.authenticated()));
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
 
 // ROOT ROUTE
 app.get("/", function(req,res){
