@@ -112,6 +112,10 @@ app.get("/logout", function(req,res){
 	res.redirect("/home");
 });
 
+
+// Show Profiles
+app.get
+
 app.listen(PORT, function() {
   console.log('app is running on port 3000');
 });
