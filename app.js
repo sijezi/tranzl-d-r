@@ -145,6 +145,11 @@ app.post("/", function(req,res){
 	});
 });
 
+//Form to to create new profile
+app.get("/new",function(req,res){
+	res.render("/profiles/new");
+});
+
 app.listen(PORT, function() {
   console.log('app is running on port 3000');
 });
