@@ -66,7 +66,7 @@ app.get('/home', function(req, res) {
 
 // SIGNUP LOGIC
 app.post("/signup", function(req, res) {
-  var newUser = new User({username: req.body.username});
+  var newUser = new User({username: req.body.username, language: req.body.language, profession: profession});
   User.register(newUser, req.body.password, function(err, user) {
     if (err) {
       // req.flash("error", err.message);
