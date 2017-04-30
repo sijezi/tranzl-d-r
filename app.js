@@ -113,13 +113,13 @@ app.get("/profiles", function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.render("/profiles_show_case", {profiles: allProfiles});
+      res.render("/profile_show_case", {profiles: allProfiles});
     }
   });
 });
 
 //Create new profile to db
-app.post("/profiles_show_case", function(req, res) {
+app.post("/profile", function(req, res) {
   var name = req.body.name;
   var availability = req.body.availability;
   var languages = req.body.languages;
@@ -143,9 +143,7 @@ app.post("/profiles_show_case", function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      console.log(newProfile);
       res.redirect("/profile_show_case");
-
     }
   });
 });
