@@ -125,6 +125,9 @@ app.get("/profiles", function(req,res){
 });
 
 //Create new profile to db
+app.post("/", function(req,res){
+	
+})
 
 app.listen(PORT, function() {
   console.log('app is running on port 3000');
