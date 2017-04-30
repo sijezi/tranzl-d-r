@@ -126,7 +126,10 @@ app.get("/profiles", function(req,res){
 
 //Create new profile to db
 app.post("/", function(req,res){
-	
+	var name = req.body.name;
+	var availability = req.body.availability;
+	var languages = req.body.languages;
+	var biography = req.body.biography;
 })
 
 app.listen(PORT, function() {
