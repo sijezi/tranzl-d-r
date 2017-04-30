@@ -10,6 +10,7 @@ var passport = require("passport");
 var LocalStrategy = require("passport-local");
 var methodOverride = require("method-override");
 var User = require("./models/user");
+var Profile = require('./models/profile');
 
 //connect to mongoose
 mongoose.connect("mongodb://localhost/translator");
@@ -56,6 +57,9 @@ app.get('/profile', function(req, res) {
   res.render("profile");
 });
 
+app.get('/profile_show_case', function(req,res) {
+	res.render("profile_show_case");
+})
 app.get('/home', function(req, res) {
   res.render("home");
 });
@@ -132,7 +136,7 @@ app.post("/", function(req, res) {
     biography: biography,
     author: author
   };
-	
+
   //Create new profile and save to db
   Profile.Create(newProfile, function(err, newCreated) {
     if (err) {

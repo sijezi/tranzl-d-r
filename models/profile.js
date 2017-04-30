@@ -4,7 +4,7 @@ var profileSchema = new mongoose.Schema({
 	availablity: String,
 	languages: String,
 	biography: String,
-	image: String
+	image: String,
 	author: {
 		id: {
 			type: mongoose.Schema.Types.ObjectId,
@@ -15,4 +15,4 @@ var profileSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.mode("Campground", camgroundSchema);
+module.exports = mongoose.model("Profile", profileSchema);
