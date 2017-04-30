@@ -51,6 +51,15 @@ app.get("/signup", function(req,res){
 	res.render("signup");
 });
 
+app.get('/profile', function(req,res) {
+	res.render("profile");
+});
+
+app.get('/home', function(req,res) {
+	res.render("home");
+});
+
+
 // SIGNUP LOGIC
 app.post("/signup", function(req,res){
 	var newUser = new User({username: req.body.username});
