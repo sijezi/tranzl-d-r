@@ -1,5 +1,7 @@
 body {
 	background: #eee !important;
+	font-family: 'Dosis', sans-serif;
+	width: 1140px;
 }
 
 .wrapper {
