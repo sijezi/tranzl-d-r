@@ -7,7 +7,11 @@
   <title>Document</title>
   <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<<<<<<< HEAD
 <link rel="stylesheet" http="public/css/style.css">
+=======
+<link rel="stylesheet" href="../css/style.css">
+>>>>>>> d622042aa5055c7eb01a3f118a6437b55888aef3
 <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800&amp;subset=latin-ext" rel="stylesheet">
 </head>
 <style>
@@ -72,10 +76,10 @@ h1 {
 </style>
 <body>
   <div class="container">
-  <form class="form-signin">
+  <form class="form-signin" action="/signup" method="POST">
     <h1 class="text-center">Login</h1>
     <br>
-    <input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" />
+    <input type="text" class="form-control" name="username" placeholder="username" required="" autofocus="" />
     <input type="password" class="form-control" name="password" placeholder="Password" required=""/>
     <label class="checkbox">
       <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
