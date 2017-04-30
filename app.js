@@ -17,6 +17,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 //set view engine
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
+app.use(flash());
 
 
 //PASSPORT CONFIG
