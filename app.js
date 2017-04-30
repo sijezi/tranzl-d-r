@@ -6,9 +6,8 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var flash = require("connect-flash");
 var passport = require("passport");
-var localStrategy = require("passport-local");
+var LocalStrategy = require("passport-local");
 var methodOverride = require("method-override");
-var passportLocalMongoose = require("passport-local-mongoose");
 var User = require("./models/user");
 
 //connect to mongoose
@@ -31,7 +30,7 @@ app.use(require('express-session')({
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new localStrategy(User.authenticate()));
+passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -55,7 +54,7 @@ app.get("/signup", function(req,res){
 
 // SIGNUP LOGIC
 app.post("/signup", function(req,res){
-	var newUser = new User({name: req.body.name});
+	var newUser = new User({username: req.body.name});
 	User.register(newUser, req.body.password, function(err,user){
 		if(err){
 			req.flash("error", err.message);
@@ -63,8 +62,8 @@ app.post("/signup", function(req,res){
 			return res.render("signup");
 		}
 		passport.authenticate("local")(req,res,function(){
-			req.flash("success", "Welcome to translatr" + user.name);
-			console.log(user.name);
+			req.flash("success", "Welcome to translatr" + user.username);
+			console.log(user.username);
 			res.redirect("/home");
 		});
 	});
