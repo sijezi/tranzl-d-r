@@ -7,6 +7,7 @@ var mongoose = require("mongoose");
 var passport = require("passport");
 var localStrategy = require("passport-local");
 var methodOverride = require("method-override");
+var User = require("./models/user");
 
 //connect to mongoose
 mongoose.connect("mongodb://localhost/translatr");
@@ -15,12 +16,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 //set view engine
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
-
-//USER MODEL
-// var UserSchema = new mongoose.Schema({
-// 	username: String,
-// 	password: String
-// });
 
 
 //PASSPORT CONFIG
@@ -31,9 +26,17 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-// passport.use(new localStrategy(User.authenticated()));
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+app.use(function(req,res,next){
+	res.locals.currentUser = req.user;
+	res.locals.error = req.flash("error");
+	res.locals.success = req.flash("success");
+	next();
+});
 
 // ROOT ROUTE
 app.get("/", function(req,res){
