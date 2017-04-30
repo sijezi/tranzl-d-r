@@ -4,7 +4,7 @@ var profileSchema = new mongoose.Schema({
 	availablity: String,
 	languages: String,
 	biography: String,
-	// image: String,
+	specialty: String
 	author: {
 		id: {
 			type: mongoose.Schema.Types.ObjectId,

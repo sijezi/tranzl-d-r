@@ -113,7 +113,7 @@ app.get("/profiles", function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.render("/campgrounds/index", {campgrounds: allProfiles});
+      res.render("/profiles_show_case", {profiles: allProfiles});
     }
   });
 });
@@ -124,6 +124,7 @@ app.post("/", function(req, res) {
   var availability = req.body.availability;
   var languages = req.body.languages;
   var biography = req.body.biography;
+  var specialty = req.body.specialty;
   var author = {
     id: req.user_id,
     username: req.user.username
@@ -134,6 +135,7 @@ app.post("/", function(req, res) {
     availability: availability,
     languages: languages,
     biography: biography,
+    specialty: specialty,
     author: author
   };
 
