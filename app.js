@@ -81,6 +81,7 @@ app.post("/login", passport.authenticate("local",
 //LOGOUT ROUTE PENDING LOGOUT BUTTON
 app.get("/logout", function(req,res){
 	req.logout();
+	req.flash("success", "Logged you out!");
 	res.redirect("/home");
 });
 
