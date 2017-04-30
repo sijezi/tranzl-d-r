@@ -3,7 +3,8 @@ var profileSchema = new mongoose.Schema({
 	name: String,
 	availablity: String,
 	languages: String,
-	biography: String
+	biography: String,
+	image: String
 	author: {
 		id: {
 			type: mongoose.Schema.Types.ObjectId,

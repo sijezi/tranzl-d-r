@@ -130,7 +130,20 @@ app.post("/", function(req,res){
 	var availability = req.body.availability;
 	var languages = req.body.languages;
 	var biography = req.body.biography;
-})
+	var author = {
+		id: req.user_id,
+		username: req.user.username
+	},
+	var newProfile = {name: name, availability: availability, languages: languages, biography: biography, author: author}
+	//Create new profile and save to db
+	Profile.Create(newProfile, function(err,newCreated){
+		if(err){
+			console.log(err);
+		}else{
+			res.redirect("/profiles");
+		}
+	});
+});
 
 app.listen(PORT, function() {
   console.log('app is running on port 3000');
