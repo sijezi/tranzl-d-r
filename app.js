@@ -114,7 +114,15 @@ app.get("/logout", function(req,res){
 
 
 // Show Profiles
-
+app.get("/profiles", function(req,res){
+	Profile.find({}, function(err,allProfiles){
+		if(err){
+			console.log(err);
+		}else{
+			res.render("/campgrounds/index",{campgrounds: allProfiles});
+		}
+	})
+})
 
 app.listen(PORT, function() {
   console.log('app is running on port 3000');
