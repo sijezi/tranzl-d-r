@@ -54,7 +54,7 @@ app.get("/signup", function(req,res){
 
 // SIGNUP LOGIC
 app.post("/signup", function(req,res){
-	var newUser = new User({username: req.body.username});
+	var newUser = new User({name: req.body.name});
 	User.register(newUser, req.body.password, function(err,user){
 		if(err){
 			req.flash("error", err.message);
@@ -62,7 +62,7 @@ app.post("/signup", function(req,res){
 			return res.render("signup");
 		}
 		passport.authenticate("local")(req,res,function(){
-			req.flash("success", "Welcome to translatr" + user.username);
+			req.flash("success", "Welcome to translatr" + user.name);
 			res.redirect("/home");
 		});
 	});
