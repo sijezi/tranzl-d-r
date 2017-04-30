@@ -2,8 +2,8 @@ var mongoose = require("mongoose");
 var profileSchema = new mongoose.Schema({
 	name: String,
 	availablity: String,
-	languages: String,
-	biography: String,
+	language: String,
+	profession: String,
 	specialty: String,
 	author: {
 		id: {
