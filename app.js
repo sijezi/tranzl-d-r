@@ -140,7 +140,7 @@ app.post("/", function(req, res) {
   };
 
   //Create new profile and save to db
-  Profile.Create(newProfile, function(err, newCreated) {
+  Profile.Create(newProfile, function(err, newlyCreated) {
     if (err) {
       console.log(err);
     } else {
@@ -150,8 +150,8 @@ app.post("/", function(req, res) {
 });
 
 //Form to to create new profile
-app.get("/new", function(req, res) {
-  res.render("/profiles/new");
+app.get("/profiles", function(req, res) {
+  res.render("/profile_show_case");
 });
 
 app.listen(PORT, function() {
