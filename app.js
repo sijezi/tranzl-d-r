@@ -128,7 +128,7 @@ app.post("/", function(req, res) {
   var author = {
     id: req.user_id,
     username: req.user.username
-  };
+  }
 
   var newProfile = {
     name: name,
@@ -137,21 +137,22 @@ app.post("/", function(req, res) {
     biography: biography,
     specialty: specialty,
     author: author
-  };
-
+  }
   //Create new profile and save to db
   Profile.Create(newProfile, function(err, newlyCreated) {
     if (err) {
       console.log(err);
     } else {
-      res.redirect("/profiles");
+      console.log(newProfile);
+      res.redirect("/profile_show_case");
+
     }
   });
 });
 
 //Form to to create new profile
 app.get("/profiles", function(req, res) {
-  res.render("/profile_show_case");
+  res.render("/profile");
 });
 
 app.listen(PORT, function() {
