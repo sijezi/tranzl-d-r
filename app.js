@@ -23,13 +23,8 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 
-
 //PASSPORT CONFIG
-app.use(require('express-session')({
-	secret: "Coding is life",
-	resave: false,
-	saveUninitialized: false
-}));
+app.use(require('express-session')({secret: "Coding is life", resave: false, saveUninitialized: false}));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -37,79 +32,120 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-
-
-app.use(function(req,res,next){
-	res.locals.currentUser = req.user;
-	res.locals.error = req.flash("error");
-	res.locals.success = req.flash("success");
-	next();
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.user;
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
+  next();
 });
 
 // ROOT ROUTE
-app.get("/", function(req,res){
-	res.render("home");
+app.get("/", function(req, res) {
+  res.render("home");
 });
 
-app.get("/home", function(req,res){
-	res.render("home");
+app.get("/home", function(req, res) {
+  res.render("home");
 });
 
-app.get("/signup", function(req,res){
-	res.render("signup");
+app.get("/signup", function(req, res) {
+  res.render("signup");
 });
 
-app.get('/profile', function(req,res) {
-	res.render("profile");
+app.get('/profile', function(req, res) {
+  res.render("profile");
 });
 
-app.get('/home', function(req,res) {
-	res.render("home");
+app.get('/home', function(req, res) {
+  res.render("home");
 });
-
 
 // SIGNUP LOGIC
-app.post("/signup", function(req,res){
-	var newUser = new User({username: req.body.username});
-	User.register(newUser, req.body.password, function(err,user){
-		if(err){
-			// req.flash("error", err.message);
-			// console.log(err.message);
-			
-			return res.render("signup");
+app.post("/signup", function(req, res) {
+  var newUser = new User({username: req.body.username});
+  User.register(newUser, req.body.password, function(err, user) {
+    if (err) {
+      // req.flash("error", err.message);
+      // console.log(err.message);
 
-		}
-		passport.authenticate("local")(req,res,function(){
-			req.flash("success", "Welcome to translatr" + user.username);
-			console.log(user.username);
-			res.redirect("home");
-		});
-	});
+      return res.render("signup");
+
+    }
+    passport.authenticate("local")(req, res, function() {
+      req.flash("success", "Welcome to translatr" + user.username);
+      console.log(user.username);
+      res.redirect("home");
+    });
+  });
 });
 
 //LOGIN ROUTE
-app.get("/login", function(req,res){
-	res.render("login");
+app.get("/login", function(req, res) {
+  res.render("login");
 });
 
 // LOGIN LOGIC
-app.post("/login", passport.authenticate("local",
-	{
-		successRedirect: "home",
-		failureRedirect: "/login"
-	}), function(req,res){
-	if(req.isAuthenticated()){
-		return next();
-	}
-	req.flash("error", "You Need To Be Logged In To Do That!");
-	res.redirect("/login");
+app.post("/login", passport.authenticate("local", {
+  successRedirect: "home",
+  failureRedirect: "/login"
+}), function(req, res) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  req.flash("error", "You Need To Be Logged In To Do That!");
+  res.redirect("/login");
 });
 
 //LOGOUT ROUTE PENDING LOGOUT BUTTON
-app.get("/logout", function(req,res){
-	req.logout();
-	req.flash("success", "Logged you out!");
-	res.redirect("/home");
+app.get("/logout", function(req, res) {
+  req.logout();
+  req.flash("success", "Logged you out!");
+  res.redirect("/home");
+});
+
+// Show Profiles
+app.get("/profiles", function(req, res) {
+  Profile.find({}, function(err, allProfiles) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("/campgrounds/index", {campgrounds: allProfiles});
+    }
+  });
+});
+
+//Create new profile to db
+app.post("/", function(req, res) {
+  var name = req.body.name;
+  var availability = req.body.availability;
+  var languages = req.body.languages;
+  var biography = req.body.biography;
+  var author = {
+    id: req.user_id,
+    username: req.user.username
+  };
+
+  var newProfile = {
+    name: name,
+    availability: availability,
+    languages: languages,
+    biography: biography,
+    author: author
+  };
+	
+  //Create new profile and save to db
+  Profile.Create(newProfile, function(err, newCreated) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/profiles");
+    }
+  });
+});
+
+//Form to to create new profile
+app.get("/new", function(req, res) {
+  res.render("/profiles/new");
 });
 
 app.listen(PORT, function() {
