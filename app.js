@@ -18,25 +18,31 @@ app.use(methodOverride("_method"));
 
 
 //PASSPORT CONFIG
-app.use(require('express-session'){
+app.use(require('express-session')({
 	secret: "Coding is life",
 	resave: false,
 	saveUninitialized: false
-});
+}));
+
+
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new localStrategy(User.authenticated()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+//passport.use(new localStrategy(User.authenticated()));
+//passport.serializeUser(User.serializeUser());
+//passport.deserializeUser(User.deserializeUser());
 
 // ROOT ROUTE
 app.get("/", function(req,res){
 	res.render("home");
 });
 
-// SIGNUP ROUTE TO SHOW REGISTER FORM
-app.get("/signup", function(req, res){
+app.get("/signup", function(req,res){
 	res.render("signup");
+});
+
+// SIGNUP ROUTE TO SHOW REGISTER FORM
+app.get("/login", function(req, res){
+	res.render("login");
 });
 
 app.listen(PORT, function() {
