@@ -26,11 +26,13 @@ app.use(require('express-session')({
 	resave: false,
 	saveUninitialized: false
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
 
 
 app.use(function(req,res,next){
@@ -45,8 +47,7 @@ app.get("/", function(req,res){
 	res.render("home");
 });
 
-// SIGNUP ROUTE TO SHOW REGISTER FORM
-app.get("/signup", function(req, res){
+app.get("/signup", function(req,res){
 	res.render("signup");
 });
 
