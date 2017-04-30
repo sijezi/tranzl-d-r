@@ -4,6 +4,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+var flash = require("connect-flash");
 var passport = require("passport");
 var localStrategy = require("passport-local");
 var methodOverride = require("method-override");
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 //set view engine
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
+app.use(flash());
 
 
 //PASSPORT CONFIG
@@ -24,21 +26,13 @@ app.use(require('express-session')({
 	resave: false,
 	saveUninitialized: false
 }));
-<<<<<<< HEAD
 
-
-app.use(passport.initialize());
-app.use(passport.session());
-//passport.use(new localStrategy(User.authenticated()));
-//passport.serializeUser(User.serializeUser());
-//passport.deserializeUser(User.deserializeUser());
-=======
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
->>>>>>> cc6ea90d70b0c0a6ff39a96199b17323d35cff4c
+
 
 
 app.use(function(req,res,next){
@@ -57,25 +51,41 @@ app.get("/signup", function(req,res){
 	res.render("signup");
 });
 
-<<<<<<< HEAD
-// SIGNUP ROUTE TO SHOW REGISTER FORM
-app.get("/login", function(req, res){
-	res.render("login");
+// SIGNUP LOGIC
+app.post("/signup", function(req,res){
+	var newUser = new User({username: req.body.username});
+	User.register(newUser, req.body.password, function(err,user){
+		if(err){
+			req.flash("error", err.message);
+			return res.render("register");
+		}
+		passport.authenticate("local")(req,res,function(){
+			req.flash("success", "Welcome to translatr" + user.username);
+			res.redirect("/home");
+		});
+	});
 });
 
-=======
 //LOGIN ROUTE
 app.get("/login", function(req,res){
 	res.render("login");
 });
 
+// LOGIN LOGIC
+app.post("/login", passport.authenticate("local",
+	{
+		successRedirect: "/home",
+		failureRedirect: "/login"
+	}), function(req,res){
+});
+
 //LOGOUT ROUTE PENDING LOGOUT BUTTON
 app.get("/logout", function(req,res){
 	req.logout();
-	res.redirect("home");
+	req.flash("success", "Logged you out!");
+	res.redirect("/home");
 });
 
->>>>>>> cc6ea90d70b0c0a6ff39a96199b17323d35cff4c
 app.listen(PORT, function() {
   console.log('app is running on port 3000');
 });
