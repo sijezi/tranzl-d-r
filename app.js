@@ -48,6 +48,11 @@ app.get("/signup", function(req, res){
 	res.render("signup");
 });
 
+// SIGNUP LOGIC
+app.post("/signup", function(req,res){
+	var newUser = new User({username: req.body.username});
+})
+
 //LOGIN ROUTE
 app.get("/login", function(req,res){
 	res.render("login");
