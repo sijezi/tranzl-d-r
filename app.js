@@ -121,8 +121,10 @@ app.get("/profiles", function(req,res){
 		}else{
 			res.render("/campgrounds/index",{campgrounds: allProfiles});
 		}
-	})
-})
+	});
+});
+
+//Create new profile to db
 
 app.listen(PORT, function() {
   console.log('app is running on port 3000');
